@@ -1,12 +1,20 @@
-import { Box, BoxProps, Button } from '@chakra-ui/core'
+import { Box, BoxProps, Button, useToast } from '@chakra-ui/core'
 import React, { FC, forwardRef } from 'react'
-import { useAlerts } from './useAlerts'
 
 export const MyBox: FC<BoxProps> = forwardRef(({ children, ...rest }, ref) => {
-  const Alert = useAlerts()
+  const toast = useToast()
+  const sendToast = () => {
+    toast({
+      status: 'success',
+      description: 'hello',
+      duration: 3000,
+      isClosable: true,
+      position: 'top-right',
+    })
+  }
   return (
     <Box ref={ref} {...rest}>
-      <Button onClick={() => Alert.success('hello')}>{children}</Button>
+      <Button onClick={sendToast}>{children}</Button>
     </Box>
   )
 })
